@@ -5,6 +5,23 @@
     <title>List of Vets</title>
 </head>
 <body>
+<!---/*@thymesVar id="vet" type="volha.spring.newpetclinic.model.Vet"*/-->
     <h1 th:text="'List of Vets!!!'">List</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>FirstName</th>
+        <th>LastName</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="vet:${vets}">
+        <td th:text="${vet.id}">1</td>
+        <td th:text="${vet.firstName}">2</td>
+        <td th:text="${vet.lastName}">3</td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>
