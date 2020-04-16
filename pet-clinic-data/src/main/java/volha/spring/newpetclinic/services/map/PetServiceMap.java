@@ -1,14 +1,14 @@
 package volha.spring.newpetclinic.services.map;
 
 import volha.spring.newpetclinic.model.Pet;
-import volha.spring.newpetclinic.services.CrudService;
+import volha.spring.newpetclinic.services.PetService;
 
 import java.util.Set;
 
 /*
  *Created by olga on 15.04.2020
  */
-public class PetServiceMap extends AbstractMapService<Pet, Long> implements CrudService<Pet, Long> {
+public class PetServiceMap extends AbstractMapService<Pet, Long> implements PetService {
     @Override
     public Set<Pet> findAll() {
         return super.findAll();

@@ -1,14 +1,14 @@
 package volha.spring.newpetclinic.services.map;
 
 import volha.spring.newpetclinic.model.Owner;
-import volha.spring.newpetclinic.services.CrudService;
+import volha.spring.newpetclinic.services.OwnerService;
 
 import java.util.Set;
 
 /*
  *Created by olga on 15.04.2020
  */
-public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements CrudService<Owner, Long> {
+public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService{
     @Override
     public Set<Owner> findAll() {
         return super.findAll();
@@ -21,7 +21,7 @@ public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements 
 
     @Override
     public void delete(Owner owner) {
-        this.delete(owner);
+        super.delete(owner);
     }
 
     @Override
@@ -31,6 +31,11 @@ public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements 
 
     @Override
     public Owner findById(Long id) {
-        return this.findById(id);
+        return super.findById(id);
+    }
+
+    @Override
+    public Owner findByLastName(String lastName) {
+        return this.findByLastName(lastName);
     }
 }
