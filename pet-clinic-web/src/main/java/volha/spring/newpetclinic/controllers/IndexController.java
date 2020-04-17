@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexController {
     @RequestMapping({"", "/", "index", "index.html"})
     public String index(){
+        System.out.println("Print");
         return "index";
     }
 }
