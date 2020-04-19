@@ -2,7 +2,7 @@ package volha.spring.newpetclinic.services.map;
 
 import org.springframework.stereotype.Service;
 import volha.spring.newpetclinic.model.Speciality;
-import volha.spring.newpetclinic.services.SpecialtyService;
+import volha.spring.newpetclinic.services.SpecialityService;
 
 import java.util.Set;
 
@@ -10,7 +10,7 @@ import java.util.Set;
  *Created by olga on 19.04.2020
  */
 @Service
-public class SpecialityMapService extends AbstractMapService<Speciality, Long> implements SpecialtyService {
+public class SpecialityMapService extends AbstractMapService<Speciality, Long> implements SpecialityService {
     @Override
     public Set<Speciality> findAll() {
         return super.findAll();
