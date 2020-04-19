@@ -2,7 +2,10 @@ package volha.spring.newpetclinic.services.map;
 
 import org.springframework.stereotype.Service;
 import volha.spring.newpetclinic.model.Owner;
+import volha.spring.newpetclinic.model.Pet;
 import volha.spring.newpetclinic.services.OwnerService;
+import volha.spring.newpetclinic.services.PetService;
+import volha.spring.newpetclinic.services.PetTypeService;
 
 import java.util.Set;
 
@@ -10,7 +13,15 @@ import java.util.Set;
  *Created by olga on 15.04.2020
  */
 @Service
-public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService{
+public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService {
+    private final PetTypeService petTypeService;
+    private final PetService petService;
+
+    public OwnerServiceMap(PetTypeService petTypeService, PetService petService) {
+        this.petTypeService = petTypeService;
+        this.petService = petService;
+    }
+
     @Override
     public Set<Owner> findAll() {
         return super.findAll();
@@ -28,7 +39,26 @@ public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements 
 
     @Override
     public Owner save(Owner owner) {
-        return super.save(owner);
+        Owner savedOwner = null;
+        if (owner != null) {
+            if (owner.getPets() != null) {
+                owner.getPets().forEach(pet -> {
+                    if (pet.getPetType() != null) {
+                        if(pet.getPetType().getId() == null){
+                            pet.setPetType(petTypeService.save(pet.getPetType()));
+                        }
+                    }else {
+                        throw new RuntimeException("PetType is required");
+                    }
+                    if(pet.getId() == null){
+                        Pet savedPet = petService.save(pet);
+                        pet.setId(savedPet.getId());
+                    }
+                });
+            }
+            savedOwner = super.save(owner);
+        }
+        return savedOwner;
     }
 
     @Override
