@@ -17,10 +17,10 @@ public class VetController {
         this.vetService = vetService;
     }
 
-    @RequestMapping({"/vets", "/vets/index", "/vets/index.html"})
+    @RequestMapping({"/vets", "/vets/index", "/vets/index.html", "/vets.html"})
     public String listVets(Model model) {
         model.addAttribute("vets", vetService.findAll());
-        System.out.println("vetcontroller");
+//        System.out.println("vetcontroller");
         return "vets/index";
     }
 }
