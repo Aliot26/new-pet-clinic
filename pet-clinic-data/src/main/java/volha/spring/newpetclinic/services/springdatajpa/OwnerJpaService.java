@@ -1,5 +1,6 @@
 package volha.spring.newpetclinic.services.springdatajpa;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import volha.spring.newpetclinic.model.Owner;
 import volha.spring.newpetclinic.repositories.OwnerRepository;
@@ -14,6 +15,7 @@ import java.util.Set;
  *Created by olga on 22.04.2020
  */
 @Service
+@Profile("springdatajpa")
 public class OwnerJpaService implements OwnerService {
     private final OwnerRepository ownerRepository;
     private final PetRepository petRepository;
