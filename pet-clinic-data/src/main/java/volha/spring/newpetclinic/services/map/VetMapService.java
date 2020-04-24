@@ -1,5 +1,6 @@
 package volha.spring.newpetclinic.services.map;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import volha.spring.newpetclinic.model.Speciality;
 import volha.spring.newpetclinic.model.Vet;
@@ -12,6 +13,7 @@ import java.util.Set;
  *Created by olga on 15.04.2020
  */
 @Service
+@Profile({"default", "map"})
 public class VetMapService extends AbstractMapService<Vet, Long> implements VetService {
 
     private final SpecialityService specialityService;

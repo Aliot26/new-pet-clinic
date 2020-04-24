@@ -1,5 +1,6 @@
 package volha.spring.newpetclinic.services.map;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import volha.spring.newpetclinic.model.PetType;
 import volha.spring.newpetclinic.services.PetTypeService;
@@ -10,6 +11,7 @@ import java.util.Set;
  *Created by olga on 17.04.2020
  */
 @Service
+@Profile({"default", "map"})
 public class PetTypeMapService extends AbstractMapService<PetType, Long> implements PetTypeService {
     @Override
     public Set<PetType> findAll() {
