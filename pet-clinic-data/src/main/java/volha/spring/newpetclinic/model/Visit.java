@@ -1,6 +1,9 @@
 package volha.spring.newpetclinic.model;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -11,8 +14,6 @@ import java.time.LocalDate;
 @Setter
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @Entity
 @Table(name = "visits")
 public class Visit extends BaseEntity {
@@ -26,5 +27,13 @@ public class Visit extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "pet_id")
     private Pet pet;
+
+    @Builder
+    public Visit(Long id, LocalDate date, String description, Pet pet){
+        super(id);
+        this.date = date;
+        this.description = description;
+        this.pet = pet;
+    }
 
 }
