@@ -2,6 +2,7 @@ package volha.spring.newpetclinic.services.map;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import volha.spring.newpetclinic.model.Speciality;
 import volha.spring.newpetclinic.model.Vet;
 
 import java.util.Set;
@@ -16,8 +17,16 @@ class VetMapServiceTest {
 
     @BeforeEach
     void setUp() {
-        vetMapService = new VetMapService(new SpecialityMapService());
-        vetMapService.save(Vet.builder().id(vetId).build());
+        specialityMapService = new SpecialityMapService();
+        specialityMapService.save(Speciality.builder().id(2L).build());
+        vetMapService = new VetMapService(specialityMapService);
+        vetMapService.save(Vet.builder().id(vetId).specialities(specialityMapService.findAll()).build());
+    }
+
+    Set<Speciality> prepareSpeciality(){
+        specialityMapService.save(Speciality.builder().id(2L).build());
+        Set<Speciality> specialities = specialityMapService.findAll();
+        return specialities;
     }
 
     @Test
@@ -41,13 +50,13 @@ class VetMapServiceTest {
     @Test
     void saveExistingId() {
         Long id = 2L;
-        Vet savedVet = vetMapService.save(Vet.builder().id(id).build());
+        Vet savedVet = vetMapService.save(Vet.builder().id(id).specialities(prepareSpeciality()).build());
         assertEquals(id, savedVet.getId());
     }
 
     @Test
     void saveNoId(){
-        Vet savedVet = vetMapService.save(Vet.builder().build());
+        Vet savedVet = vetMapService.save(Vet.builder().specialities(prepareSpeciality()).build());
         assertNotNull(savedVet);
         assertNotNull(savedVet.getId());
     }

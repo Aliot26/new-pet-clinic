@@ -17,12 +17,19 @@ class SpecialityMapServiceTest {
     @BeforeEach
     void setUp() {
         specialityMapService = new SpecialityMapService();
+        specialityMapService.save(Speciality.builder().id(specId).build());
     }
 
     @Test
     void findAll() {
         Set<Speciality> specialities = specialityMapService.findAll();
         assertEquals(1, specialities.size());
+    }
+
+    @Test
+    void findById() {
+        Speciality spec = specialityMapService.findById(specId);
+        assertEquals(specId, spec.getId());
     }
 
     @Test
@@ -45,15 +52,11 @@ class SpecialityMapServiceTest {
     }
 
     @Test
-    void saveNoId(){
+    void saveNoId() {
         Speciality specSaved = specialityMapService.save(Speciality.builder().build());
         assertNotNull(specSaved);
         assertNotNull(specSaved.getId());
     }
 
-    @Test
-    void findById() {
-        Speciality spec = specialityMapService.findById(specId);
-        assertEquals(specId, spec.getId());
-    }
+
 }
