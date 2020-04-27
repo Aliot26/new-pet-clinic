@@ -8,8 +8,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import volha.spring.newpetclinic.model.Owner;
 import volha.spring.newpetclinic.repositories.OwnerRepository;
-import volha.spring.newpetclinic.repositories.PetRepository;
-import volha.spring.newpetclinic.repositories.PetTypeRepository;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -27,11 +25,11 @@ class OwnerJpaServiceTest {
     @Mock
     OwnerRepository ownerRepository;
 
-    @Mock
-    PetRepository petRepository;
-
-    @Mock
-    PetTypeRepository petTypeRepository;
+//    @Mock
+//    PetRepository petRepository;
+//
+//    @Mock
+//    PetTypeRepository petTypeRepository;
 
     @InjectMocks
     OwnerJpaService ownerJpaService;
