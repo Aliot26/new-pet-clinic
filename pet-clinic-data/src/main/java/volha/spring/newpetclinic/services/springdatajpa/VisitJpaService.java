@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import volha.spring.newpetclinic.model.Visit;
 import volha.spring.newpetclinic.repositories.VisitRepository;
-import volha.spring.newpetclinic.services.VisitServise;
+import volha.spring.newpetclinic.services.VisitService;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,7 +14,7 @@ import java.util.Set;
  */
 @Service
 @Profile("springdatajpa")
-public class VisitJpaService implements VisitServise {
+public class VisitJpaService implements VisitService {
     private final VisitRepository visitRepository;
 
     public VisitJpaService(VisitRepository visitRepository) {

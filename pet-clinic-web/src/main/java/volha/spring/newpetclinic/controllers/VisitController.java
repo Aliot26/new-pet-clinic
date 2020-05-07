@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.*;
 import volha.spring.newpetclinic.model.Pet;
 import volha.spring.newpetclinic.model.Visit;
 import volha.spring.newpetclinic.services.PetService;
-import volha.spring.newpetclinic.services.VisitServise;
+import volha.spring.newpetclinic.services.VisitService;
 
 import javax.validation.Valid;
+import java.beans.PropertyEditorSupport;
+import java.time.LocalDate;
 
 /*
  *Created by olga on 05.05.2020
@@ -20,17 +22,25 @@ import javax.validation.Valid;
 public class VisitController {
     private static final String VIEWS_VISITS_CREATE_OR_UPDATE_FORM = "pets/createOrUpdateVisitForm";
 
-    private final VisitServise visitServise;
+    private final VisitService visitService;
     private final PetService petService;
 
-    public VisitController(VisitServise visitServise, PetService petService) {
-        this.visitServise = visitServise;
+    public VisitController(VisitService visitService, PetService petService) {
+        this.visitService = visitService;
         this.petService = petService;
     }
 
     @InitBinder
     public void initOwnerBinder(WebDataBinder dataBinder) {
         dataBinder.setDisallowedFields("id");
+
+        dataBinder.registerCustomEditor(LocalDate.class, new PropertyEditorSupport() {
+            @Override
+            public void setAsText(String text) throws IllegalArgumentException {
+                setValue(LocalDate.parse(text));
+            }
+        });
+
     }
 
     @ModelAttribute("visit")
@@ -44,16 +54,16 @@ public class VisitController {
     }
 
     @GetMapping("owners/*/pets/{petId}/visits/new")
-    public String initNewVisitForm(@PathVariable("petId") Long petId, Model model){
+    public String initNewVisitForm(@PathVariable("petId") Long petId, Model model) {
         return VIEWS_VISITS_CREATE_OR_UPDATE_FORM;
     }
 
-    @PostMapping("owners/*/pets/{petId}/new")
-    public String processNewVisitForm(@Valid Visit visit, BindingResult result){
-        if(result.hasErrors()){
+    @PostMapping("owners/*/pets/{petId}/visit/new")
+    public String processNewVisitForm(@PathVariable("petId") Long petId, @Valid Visit visit, BindingResult result) {
+        if (result.hasErrors()) {
             return VIEWS_VISITS_CREATE_OR_UPDATE_FORM;
-        }else {
-            visitServise.save(visit);
+        } else {
+            visitService.save(visit);
             return "redirect:/owners/{ownerId}";
         }
     }
