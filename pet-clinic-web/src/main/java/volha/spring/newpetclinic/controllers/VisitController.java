@@ -53,14 +53,21 @@ public class VisitController {
         return visit;
     }
 
-    @GetMapping("owners/*/pets/{petId}/visits/new")
+    @GetMapping("owners/{ownerId}/pets/{petId}/visits/new")
     public String initNewVisitForm(@PathVariable("petId") Long petId, Model model) {
+        Visit visit = new Visit();
+        Pet pet = petService.findById(petId);
+        pet.getVisits().add(visit);
+        model.addAttribute("pet", pet);
         return VIEWS_VISITS_CREATE_OR_UPDATE_FORM;
     }
 
-    @PostMapping("owners/*/pets/{petId}/visit/new")
-    public String processNewVisitForm(@PathVariable("petId") Long petId, @Valid Visit visit, BindingResult result) {
+    @PostMapping("owners/{ownerId}/pets/{petId}/visits/new")
+    public String processNewVisitForm(@PathVariable("petId") Long petId, @PathVariable("ownerId") Long ownerId, @Valid Visit visit, BindingResult result, Model model) {
+        Pet pet = petService.findById(petId);
+        pet.getVisits().add(visit);
         if (result.hasErrors()) {
+            model.addAttribute("pet", pet);
             return VIEWS_VISITS_CREATE_OR_UPDATE_FORM;
         } else {
             visitService.save(visit);

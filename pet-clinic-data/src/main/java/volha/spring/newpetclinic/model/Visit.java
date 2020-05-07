@@ -24,8 +24,8 @@ public class Visit extends BaseEntity {
     @Column(name = "description")
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "pet_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "pet_id", referencedColumnName = "id")
     private Pet pet;
 
     @Builder
