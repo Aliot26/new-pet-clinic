@@ -6,8 +6,7 @@ import volha.spring.newpetclinic.model.Pet;
 
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 class PetMapServiceTest {
     PetMapService petMapService;
@@ -26,10 +25,23 @@ class PetMapServiceTest {
     }
 
     @Test
-    void findById() {
+    void findByIdExistingid() {
         Pet pet = petMapService.findById(petId);
         assertEquals(petId, pet.getId());
     }
+
+    @Test
+    void findByIdNotExistingId() {
+        Pet pet = petMapService.findById(5L);
+        assertNull(pet);
+    }
+
+    @Test
+    void findByIdNull() {
+        Pet pet = petMapService.findById(null);
+        assertNull(pet);
+    }
+
 
     @Test
     void deleteById() {
@@ -46,7 +58,16 @@ class PetMapServiceTest {
     }
 
     @Test
-    void saveNoId(){
+    void saveByDuplicateId() {
+        Long id = 1l;
+        Pet pet2 = Pet.builder().id(id).build();
+        Pet savedPet = petMapService.save(pet2);
+        assertEquals(id, savedPet.getId());
+        assertEquals(1, petMapService.findAll().size());
+    }
+
+    @Test
+    void saveNoId() {
         Pet savedPet = petMapService.save(Pet.builder().build());
         assertNotNull(savedPet);
         assertNotNull(savedPet.getId());
@@ -58,5 +79,36 @@ class PetMapServiceTest {
         assertEquals(0, petMapService.findAll().size());
     }
 
+    @Test
+    void deleteWithWrongId() {
+        Pet pet = Pet.builder().id(5L).build();
+        petMapService.delete(pet);
+        assertEquals(1, petMapService.findAll().size());
+    }
 
+    @Test
+    void deleteWithNullId() {
+        Pet pet = Pet.builder().build();
+        petMapService.delete(pet);
+        assertEquals(1, petMapService.findAll().size());
+    }
+
+    @Test
+    void deleteNull(){
+        petMapService.delete(null);
+        assertEquals(1, petMapService.findAll().size());
+    }
+
+    @Test
+    void deleteByIdWrongId(){
+        Pet pet = Pet.builder().id(5L).build();
+        petMapService.deleteById(5L);
+        assertEquals(1, petMapService.findAll().size());
+    }
+
+    @Test
+    void deleteByIdNullId(){
+        petMapService.deleteById(null);
+        assertEquals(1, petMapService.findAll().size());
+    }
 }
