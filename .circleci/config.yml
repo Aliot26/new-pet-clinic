@@ -15,7 +15,6 @@ jobs:
       # - image: circleci/postgres:9.4
       - image: circleci/mysql:latest-ram
         environment:
-          - MYSQL_ROOT_PASSWORD: 1234
           - MYSQL_DATABASE: clinic
           - MYSQL_USER: petclinic
           - MYSQL_PASSWORD: 1234
