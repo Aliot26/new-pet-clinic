@@ -2,5 +2,20 @@
 
 # PetClinic
 
+PetClinic is an application to support workflows at the vet clinic. The application helps to manage an information about clients and their animals. Also it provides possibilities to make doctor appointments. 
 
-Project from Udemy course 
+## Used technology:
+    - Spring Framework 
+    - Spring Boot 
+    - Spring Data JPA
+    - Spring MockMVC
+    - Hibernate
+    - MySQL
+    - Lombok
+    - Maven
+    - JUnit 5
+    - Mockito
+    - Thymeleaf
+    - Circle CI
+
+## Screenshots:
