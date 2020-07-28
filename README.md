@@ -21,3 +21,9 @@ PetClinic is an application to support workflows at the vet clinic. The applicat
 ## Screenshots:
 Diagram of structure of the database
 ![ScreenShot](https://github.com/Aliot26/new-pet-clinic/blob/master/screenshots/diagram.png?raw=true)
+
+List of owners with their data and pets
+![ScreenShot](https://github.com/Aliot26/new-pet-clinic/blob/master/screenshots/list_owners.png?raw=true)
+
+Owner details page with pet's data and booking appointment to vet
+![ScreenShot](https://github.com/Aliot26/new-pet-clinic/blob/master/screenshots/owners_details.png?raw=true)
