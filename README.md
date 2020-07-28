@@ -19,3 +19,5 @@ PetClinic is an application to support workflows at the vet clinic. The applicat
     - Circle CI
 
 ## Screenshots:
+Diagram of structure of the database
+![ScreenShot](https://github.com/Aliot26/new-pet-clinic/blob/master/screenshots/diagram.png?raw=true)
