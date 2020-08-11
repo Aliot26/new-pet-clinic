@@ -1,6 +1,8 @@
 package volha.spring.newpetclinic.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,12 +27,13 @@ public class Pet extends BaseEntity {
     @Column(name = "name")
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "type_id")
     private PetType petType;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "owner_id",  referencedColumnName = "id")
+    @JsonBackReference
     private Owner owner;
 
     @Column(name = "birth_date")
@@ -38,6 +41,7 @@ public class Pet extends BaseEntity {
     private LocalDate birthDate;
 
     @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "pet")
+    @JsonManagedReference
     private Set<Visit> visits = new HashSet<>();
 
     @Builder

@@ -1,5 +1,6 @@
 package volha.spring.newpetclinic.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,7 +29,7 @@ public class Owner extends Person {
     private String telephone;
 
     @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "owner")
-//    @Cascade({SAVE_UPDATE})
+    @JsonManagedReference
     private Set<Pet> pets = new HashSet<>();
 
     @Builder
