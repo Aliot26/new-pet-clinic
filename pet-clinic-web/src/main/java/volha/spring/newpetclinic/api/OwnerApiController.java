@@ -4,10 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import volha.spring.newpetclinic.model.Owner;
 import volha.spring.newpetclinic.services.OwnerService;
 
@@ -31,9 +28,17 @@ public class OwnerApiController{
         return new ResponseEntity<Set<Owner>>(ownerService.findAll(), HttpStatus.OK);
     }
 
+    @ApiOperation(value = "This will get the owner")
     @GetMapping("/owners/{owner_id}")
     public ResponseEntity<Owner> getOwnerById(@PathVariable Long owner_id){
         return new ResponseEntity<Owner>(ownerService.findById(owner_id), HttpStatus.OK);
     }
+
+    @PostMapping("/owners")
+    public ResponseEntity<Void> createOwner(@RequestBody Owner owner){
+        ownerService.save(owner);
+        return new ResponseEntity<Void>(HttpStatus.CREATED);
+    }
+
 }
 

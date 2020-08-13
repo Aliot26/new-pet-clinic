@@ -1,6 +1,7 @@
 package volha.spring.newpetclinic.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,7 @@ import java.util.Set;
 @Entity
 @Table(name = "owners")
 public class Owner extends Person {
+    @ApiModelProperty(value = "This is owner's address", required = true)
     @Column(name = "address")
     private String address;
 
