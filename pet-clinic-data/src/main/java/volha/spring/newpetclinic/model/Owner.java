@@ -24,9 +24,11 @@ public class Owner extends Person {
     @Column(name = "address")
     private String address;
 
+    @ApiModelProperty(required = true)
     @Column(name = "city")
     private String city;
 
+    @ApiModelProperty(required = true)
     @Column(name = "telephone")
     private String telephone;
 

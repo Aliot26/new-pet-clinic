@@ -34,10 +34,25 @@ public class OwnerApiController{
         return new ResponseEntity<Owner>(ownerService.findById(owner_id), HttpStatus.OK);
     }
 
+    @ApiOperation(value = "This will create new owner")
     @PostMapping("/owners")
     public ResponseEntity<Void> createOwner(@RequestBody Owner owner){
         ownerService.save(owner);
         return new ResponseEntity<Void>(HttpStatus.CREATED);
+    }
+
+    @ApiOperation(value = "This will update owner's details")
+    @PatchMapping("/owners/{owner_id}")
+    public ResponseEntity<Void> updateOwner(@RequestBody Owner owner){
+        ownerService.save(owner);
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "This will delete the owner")
+    @DeleteMapping("/owners/{owner_id}")
+    public ResponseEntity<Void> deleteOwner(@PathVariable Long owner_id){
+        ownerService.deleteById(owner_id);
+        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
     }
 
 }
