@@ -1,0 +1,14 @@
+{
+  "_id": 1,
+  "first_name": "John",
+  "last_name": "First",
+  "specialities": [{
+    "speciality_id": 1,
+    "description": "Surgery"
+  },{
+    "speciality_id": 2,
+    "description": "Radiology"
+  }
+  ]
+}
+
