@@ -13,7 +13,7 @@ import java.util.Set;
 /*
  *Created by olga on 11.08.2020
  */
-@Api("OwnerController for aplication Pet Clinic")
+@Api("ApiController for Owners")
 @RestController
 @RequestMapping("/api")
 public class OwnerApiController{
