@@ -1,7 +1,7 @@
 package volha.spring.newpetclinic.config;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
@@ -16,15 +16,15 @@ import java.util.ArrayList;
  *Created by olga on 12.08.2020
  */
 @EnableSwagger2
-@Import(SwaggerConfig.class)
-public class SwaggerConfig { //extends WebMvcConfigurationSupport {
+@Configuration
+public class SpringFoxConfig  { //extends WebMvcConfigurationSupport {
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.ant("/api/**"))
-//                .paths(PathSelectors.any())
+//                .paths(PathSelectors.any()) for all paths
                 .build()
                 .pathMapping("/")
                 .apiInfo(metaData());
