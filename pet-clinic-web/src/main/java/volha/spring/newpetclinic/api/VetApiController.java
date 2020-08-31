@@ -51,7 +51,7 @@ public class VetApiController {
 
     @ApiOperation(value = "This will delete the vet")
     @DeleteMapping("/vets/{vet_id}")
-    public ResponseEntity<Void> deleteOwner(@PathVariable Long vet_id){
+    public ResponseEntity<Void> deleteVisit(@PathVariable Long vet_id){
         vetService.deleteById(vet_id);
         return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
     }
