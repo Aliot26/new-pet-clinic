@@ -23,7 +23,7 @@ public class PetApiController {
         this.petService = petService;
     }
 
-    @ApiOperation(value = "This will get list of pets", notes = "We have visits in this list")
+    @ApiOperation(value = "This will get list of pets")
     @GetMapping("/pets")
     public ResponseEntity<Set<Pet>> getPets(){
         return new ResponseEntity<Set<Pet>>(petService.findAll(), HttpStatus.OK);
