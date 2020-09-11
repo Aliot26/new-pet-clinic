@@ -3,8 +3,10 @@ package volha.spring.newpetclinic.bootstrap;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import volha.spring.newpetclinic.model.PetType;
+import volha.spring.newpetclinic.model.Role;
 import volha.spring.newpetclinic.model.Speciality;
 import volha.spring.newpetclinic.services.PetTypeService;
+import volha.spring.newpetclinic.services.RoleService;
 import volha.spring.newpetclinic.services.SpecialityService;
 
 /*
@@ -14,11 +16,13 @@ import volha.spring.newpetclinic.services.SpecialityService;
 public class DataLoader implements CommandLineRunner {
     private final PetTypeService petTypeService;
     private final SpecialityService specialityService;
+    private final RoleService roleService;
 
-    public DataLoader(PetTypeService petTypeService, SpecialityService specialityService) {
+    public DataLoader(PetTypeService petTypeService, SpecialityService specialityService, RoleService roleService) {
 
         this.petTypeService = petTypeService;
         this.specialityService = specialityService;
+        this.roleService = roleService;
     }
 
 
@@ -32,6 +36,11 @@ public class DataLoader implements CommandLineRunner {
         int countSpecialities = specialityService.findAll().size();
         if (countSpecialities == 0) {
             loadSpecialities();
+        }
+
+        int countRoles = roleService.findAll().size();
+        if(countRoles == 0){
+            loadRoles();
         }
     }
 
@@ -59,5 +68,15 @@ public class DataLoader implements CommandLineRunner {
         PetType cat = new PetType();
         cat.setName("Cat");
         PetType savedCatPetType = petTypeService.save(cat);
+    }
+
+    private void loadRoles(){
+        Role admin = new Role();
+        admin.setName("ADMIN");
+        Role savedAdminRole = roleService.save(admin);
+
+        Role user = new Role();
+        user.setName("USER");
+        Role savedUserRole = roleService.save(user);
     }
 }
