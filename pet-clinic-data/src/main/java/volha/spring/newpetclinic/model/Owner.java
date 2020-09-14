@@ -32,6 +32,10 @@ public class Owner extends Person {
     @Column(name = "telephone")
     private String telephone;
 
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "owner")
     @JsonManagedReference
     private Set<Pet> pets = new HashSet<>();
