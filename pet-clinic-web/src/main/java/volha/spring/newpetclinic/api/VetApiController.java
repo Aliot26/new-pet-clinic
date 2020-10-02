@@ -24,6 +24,7 @@ public class VetApiController {
     }
 
     @ApiOperation(value = "This will get a list of vets")
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/vets")
     public ResponseEntity<Set<Vet>> getVets(){
         return new ResponseEntity<Set<Vet>>(vetService.findAll(), HttpStatus.OK);
